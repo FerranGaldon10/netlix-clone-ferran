@@ -10,6 +10,7 @@ import { getSession } from "next-auth/react"
 
 
 export async function getServerSideProps(context: NextPageContext) {
+  try{
   const session = await getSession(context);
 
   if (!session) {
@@ -23,6 +24,10 @@ export async function getServerSideProps(context: NextPageContext) {
 
   return {
     props: {}
+  }
+  } catch (error) {
+    console.log("Error getting session: ", error)
+    return {props: {}};
   }
 }
 
